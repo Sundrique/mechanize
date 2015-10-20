@@ -2663,6 +2663,8 @@ class HTMLForm:
             self.attrs = attrs.copy()
         else:
             self.attrs = {}
+        self.id = self.attrs.get("id")
+
         self.controls = []
         self._request_class = request_class
 

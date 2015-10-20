@@ -459,7 +459,7 @@ class Browser(UserAgentBase):
             raise BrowserStateError("not viewing HTML")
         return self._factory.title
 
-    def select_form(self, name=None, predicate=None, nr=None):
+    def select_form(self, name=None, predicate=None, nr=None, id=None):
         """Select an HTML form for input.
 
         This is a bit like giving a form the "input focus" in a browser.
@@ -492,7 +492,7 @@ class Browser(UserAgentBase):
         """
         if not self.viewing_html():
             raise BrowserStateError("not viewing HTML")
-        if (name is None) and (predicate is None) and (nr is None):
+        if (name is None) and (predicate is None) and (nr is None) and (id is None):
             raise ValueError(
                 "at least one argument must be supplied to specify form")
 
@@ -504,6 +504,8 @@ class Browser(UserAgentBase):
 
         orig_nr = nr
         for form in self.forms():
+            if id is not None and id != form.id:
+                continue
             if name is not None and name != form.name:
                 continue
             if predicate is not None and not predicate(form):
