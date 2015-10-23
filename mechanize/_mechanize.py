@@ -540,6 +540,7 @@ class Browser(UserAgentBase):
         Return value is same as for Browser.open().
 
         """
+        self.request = None
         return self.open(self.click(*args, **kwds))
 
     def click_link(self, link=None, **kwds):
